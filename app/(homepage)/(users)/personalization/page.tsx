@@ -11,90 +11,38 @@ import { useSession } from 'next-auth/react'
 export default function PersonalizationPage() {
   const { data: session } = useSession();
   return (
-    <div className='container mx-auto flex flex-col px-14 py-10 items-center justify-center gap-8'>
-      <div className='flex flex-col gap-3 items-center justify-center'>
+    <div className='container mx-auto flex flex-col px-6 sm:px-10 py-10 items-center justify-center gap-8'>
+      <div className='flex flex-col gap-3 items-center justify-center text-center'>
         {session ? (
-          <h1 className='text-4xl font-bold text-emerald-600'>{session.user?.name}</h1>
-        ): (
-          <h1 className='text-4xl font-bold text-emerald-600'>Welcome, Guest!</h1>
+          <h1 className='text-3xl sm:text-4xl font-bold text-emerald-600'>{session.user?.name}</h1>
+        ) : (
+          <h1 className='text-3xl sm:text-4xl font-bold text-emerald-600'>Welcome, Guest!</h1>
         )}
-        <h2 className='text-xl'>Its a beautiful day to try something new!</h2>
+        <h2 className='text-lg sm:text-xl'>Its a beautiful day to try something new!</h2>
       </div>
 
-      <div className='grid grid-cols-2 gap-8 mt-6'>
-        {/* Gambar Pertama */}
-        <div className='bg-white shadow-2xl rounded-3xl px-8 py-6 w-full max-w-2xl relative mb-4'>
-          <div className='flex flex-row items-center gap-6'>
-            {/* Kiri: Teks */}
-            <div className='flex flex-col flex-1'>
-              <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Breakfast</h2>
-              <h1 className='font-semibold text-2xl'>French Green Salad</h1>
-              <p className='text-gray-600'>Salad packed with fresh vegetables and fresh fruits.</p>
-              <p className='text-emerald-600 font-semibold mt-4'>125 kcal</p>
-            </div>
-
-            {/* Kanan: Gambar dengan offset ke atas */}
-            <div className='relative -mt-20'>
-              <Image src={salad} alt="salad" width={200} height={200} />
-            </div>
-          </div>
-        </div>
-
-        {/* Gambar Kedua */}
-        <div className='bg-white shadow-2xl rounded-3xl px-8 py-6 w-full max-w-2xl relative mb-4'>
-          <div className='flex flex-row items-center gap-6'>
-            {/* Kiri: Teks */}
-            <div className='flex flex-col flex-1'>
-              <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Lunch</h2>
-              <h1 className='font-semibold text-2xl'>Green Veggies</h1>
-              <p className='text-gray-600'>Veggies packed with nutrients and flavors.</p>
-              <p className='text-emerald-600 font-semibold mt-4'>115 kcal</p>
-            </div>
-
-            {/* Kanan: Gambar dengan offset ke atas */}
-            <div className='relative -mt-20'>
-              <Image src={veggies} alt="salad" width={200} height={200} />
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl'>
+        {[
+          { title: "Breakfast", name: "French Green Salad", desc: "Salad packed with fresh vegetables and fresh fruits.", kcal: "125 kcal", img: salad },
+          { title: "Lunch", name: "Green Veggies", desc: "Veggies packed with nutrients and flavors.", kcal: "115 kcal", img: veggies },
+          { title: "Lunch", name: "Grilled Chicken", desc: "Grilled chicken with a side of vegetables.", kcal: "359 kcal", img: grilled },
+          { title: "Dinner", name: "Salmon and Veggies", desc: "Salmon with a side of vegetables.", kcal: "224 kcal", img: salmon },
+        ].map((item, index) => (
+          <div key={index} className='bg-white shadow-2xl rounded-3xl px-6 sm:px-8 py-6 w-full max-w-sm sm:max-w-md md:max-w-2xl mx-auto relative'>
+            <div className='flex flex-col sm:flex-row items-center gap-6'>
+              <div className='flex flex-col flex-1 text-center sm:text-left'>
+                <h2 className='bg-emerald-600 text-white w-fit mx-auto sm:mx-0 px-6 py-2 rounded-lg mb-6 text-sm sm:text-base'>{item.title}</h2>
+                <h1 className='font-semibold text-xl sm:text-2xl'>{item.name}</h1>
+                <p className='text-gray-600 text-sm sm:text-base'>{item.desc}</p>
+                <p className='text-emerald-600 font-semibold mt-2'>{item.kcal}</p>
+              </div>
+              <div className='relative sm:mt-0'>
+                <Image src={item.img} alt={item.name} width={200} height={200} className='w-32 sm:w-40 h-auto' />
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Gambar Ketiga */}
-        <div className='bg-white shadow-2xl rounded-3xl px-8 py-6 w-full max-w-2xl relative mb-4'>
-          <div className='flex flex-row items-center gap-6'>
-            {/* Kiri: Teks */}
-            <div className='flex flex-col flex-1'>
-              <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Lunch</h2>
-              <h1 className='font-semibold text-2xl'>Grilled Chicken</h1>
-              <p className='text-gray-600'>Grilled chicken with a side of vegetables.</p>
-              <p className='text-emerald-600 font-semibold mt-4'>359 kcal</p>
-            </div>
-
-            {/* Kanan: Gambar dengan offset ke atas */}
-            <div className='relative -mt-20'>
-              <Image src={grilled} alt="salad" width={200} height={200} />
-            </div>
-          </div>
-        </div>
-
-        {/* Gambar Keempat */}
-        <div className='bg-white shadow-2xl rounded-3xl px-8 py-6 w-full max-w-2xl relative mb-4'>
-          <div className='flex flex-row items-center gap-6'>
-            {/* Kiri: Teks */}
-            <div className='flex flex-col flex-1'>
-              <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Dinner</h2>
-              <h1 className='font-semibold text-2xl'>Salmon and Veggies</h1>
-              <p className='text-gray-600'>Salmon with a side of vegetables.</p>
-              <p className='text-emerald-600 font-semibold mt-4'>224 kcal</p>
-            </div>
-
-            {/* Kanan: Gambar dengan offset ke atas */}
-            <div className='relative -mt-20'>
-              <Image src={salmon} alt="salad" width={200} height={200} />
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
 }
-

@@ -5,9 +5,8 @@ import { redirect } from 'next/navigation'
 import { useSession } from 'next-auth/react';
 
 const Layout = ({ children }: { children: ReactNode}) => {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") return console.log("Loading Session...");
+  const { data: session } = useSession();
+  
   if (session) {
     redirect("/");
   }

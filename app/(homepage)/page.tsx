@@ -9,23 +9,23 @@ export default async function Home() {
   
   return (
     <div className="container">
-      <section>
+      <section className="-mt-20 md:mt-0">
         <Hero />
       </section>
 
-      <section className="mt-30">
+      <section className="md:mt-24 mt-0">
         <About />
       </section>
 
-      <section className="mt-44">
+      <section className="mt-12 md:mt-0">
         <Goals />
       </section>
 
-      <section className="mt-32">
+      <section className="mt-16 md:mt-0">
         <Discover />
       </section>
 
-      <section className="mt-30">
+      <section className="mt-20 md:mt-0">
         <Footer />
       </section>
     </div>

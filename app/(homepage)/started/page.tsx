@@ -7,7 +7,7 @@ import protein from "@/public/protein.png";
 
 export default function Page() {
     return (
-        <div className="container mx-auto px-6 py-20 flex flex-col items-center text-center">
+        <div className="container mx-auto px-6 py-4 flex flex-col items-center text-center">
             <h2 className="text-xl text-gray-500">Welcome to</h2>
             <h1 className="text-6xl font-bold text-emerald-600 mb-12">NutriWise</h1>
 

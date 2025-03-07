@@ -63,7 +63,7 @@ const AnalyticsChart = () => {
       <h2 className="text-3xl font-bold text-center mb-4">Daily Nutrition Overview</h2>
 
       {/* Chart */}
-      <div ref={chartRef} className="w-full h-80 mt-6"></div>
+      <div ref={chartRef} className="w-full h-80 mt-6 items-center"></div>
 
       {/* Nutritional Breakdown */}
       <div className="grid grid-cols-3 gap-6 mt-6">

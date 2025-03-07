@@ -23,6 +23,7 @@ export const signInWithCredentials = async (
             password,
             redirect: false,
         });
+        console.log(result);
 
         if (result?.error) {
             return { success: false, error: result.error.message };
@@ -34,6 +35,7 @@ export const signInWithCredentials = async (
         return { success: false, error: "Error signing in user" };
     }
 };
+
 export const signUp = async (params: AuthCredentials) => {
     console.log("signUp function called with:", params);
     const { fullName, email, password } = params;

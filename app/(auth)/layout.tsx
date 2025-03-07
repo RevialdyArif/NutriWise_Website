@@ -1,11 +1,17 @@
-import { auth } from '@/auth'
+"use client";
+
 import { ReactNode } from 'react'
 import { redirect } from 'next/navigation'
+import { useSession } from 'next-auth/react';
 
-const layout = async ({ children }: { children: ReactNode}) => {
-  const session = await auth()
+const Layout = ({ children }: { children: ReactNode}) => {
+  const { data: session, status } = useSession();
 
-  if (session) redirect("/")
+  if (status === "loading") return console.log("Loading Session...");
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <main>
       <section>
@@ -15,4 +21,4 @@ const layout = async ({ children }: { children: ReactNode}) => {
   )
 }
 
-export default layout
+export default Layout

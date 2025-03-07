@@ -1,15 +1,20 @@
+import { auth } from '@/auth'
 import Header from '@/sections/Header'
-import DietPage from './diet/page'
-import PersonalizationPage from './personalization/page'
-import AnalyticsPage from './analytics/page';
+import { redirect } from 'next/navigation'
+import { ReactNode } from 'react'
 
-export default function layout() {
+export default async function layout({ children }: { children: ReactNode }) {
+  const session = await auth()
+
+  if(!session){
+    console.log('No Session Found. Redirecting to Sign In Page...  ')
+    redirect('/sign-in')
+  }
+  
   return (
-    <section>
-      <div><Header /></div>
-      <div><DietPage /></div>
-      <div><PersonalizationPage/></div>
-      <div><AnalyticsPage /></div>
-    </section>
+    <main>
+      <div className="sticky top-0 z-10"><Header /></div>
+      <div>{children}</div>
+    </main>
   )
 }

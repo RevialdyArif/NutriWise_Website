@@ -1,15 +1,23 @@
+"use client";
+
 import React from 'react'
 import Image from 'next/image'
 import salad from '@/public/french-green-salad.png'
 import veggies from '@/public/veggies.png'
 import grilled from '@/public/grilled.png'
 import salmon from '@/public/salmon.png'
+import { useSession } from 'next-auth/react'
 
 export default function PersonalizationPage() {
+  const { data: session } = useSession();
   return (
     <div className='container mx-auto flex flex-col px-14 py-10 items-center justify-center gap-8'>
       <div className='flex flex-col gap-3 items-center justify-center'>
-        <h1 className='text-4xl font-bold text-emerald-600'>Revialdy Arif</h1>
+        {session ? (
+          <h1 className='text-4xl font-bold text-emerald-600'>{session.user?.name}</h1>
+        ): (
+          <h1 className='text-4xl font-bold text-emerald-600'>Welcome, Guest!</h1>
+        )}
         <h2 className='text-xl'>Its a beautiful day to try something new!</h2>
       </div>
 
@@ -21,7 +29,7 @@ export default function PersonalizationPage() {
             <div className='flex flex-col flex-1'>
               <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Breakfast</h2>
               <h1 className='font-semibold text-2xl'>French Green Salad</h1>
-              <p className='text-gray-600'>Discover the joy of a truly nourishing meal.</p>
+              <p className='text-gray-600'>Salad packed with fresh vegetables and fresh fruits.</p>
               <p className='text-emerald-600 font-semibold mt-4'>125 kcal</p>
             </div>
 
@@ -39,7 +47,7 @@ export default function PersonalizationPage() {
             <div className='flex flex-col flex-1'>
               <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Lunch</h2>
               <h1 className='font-semibold text-2xl'>Green Veggies</h1>
-              <p className='text-gray-600'>Discover the joy of atrully noutrishing meal.</p>
+              <p className='text-gray-600'>Veggies packed with nutrients and flavors.</p>
               <p className='text-emerald-600 font-semibold mt-4'>115 kcal</p>
             </div>
 
@@ -57,7 +65,7 @@ export default function PersonalizationPage() {
             <div className='flex flex-col flex-1'>
               <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Lunch</h2>
               <h1 className='font-semibold text-2xl'>Grilled Chicken</h1>
-              <p className='text-gray-600'>Discover the joy of atrully noutrishing meal.</p>
+              <p className='text-gray-600'>Grilled chicken with a side of vegetables.</p>
               <p className='text-emerald-600 font-semibold mt-4'>359 kcal</p>
             </div>
 
@@ -75,7 +83,7 @@ export default function PersonalizationPage() {
             <div className='flex flex-col flex-1'>
               <h2 className='bg-emerald-600 text-white w-fit px-8 py-2 rounded-lg mb-8'>Dinner</h2>
               <h1 className='font-semibold text-2xl'>Salmon and Veggies</h1>
-              <p className='text-gray-600'>Discover the joy of atrully noutrishing meal.</p>
+              <p className='text-gray-600'>Salmon with a side of vegetables.</p>
               <p className='text-emerald-600 font-semibold mt-4'>224 kcal</p>
             </div>
 

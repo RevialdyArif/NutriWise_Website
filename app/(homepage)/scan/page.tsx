@@ -128,7 +128,7 @@ export default function BarcodeScanner() {
     };
 
     return (
-        <div className="max-w-lg mx-auto p-8 bg-white shadow-xl rounded-xl text-center mt-12">
+        <div className="max-w-lg mx-auto p-8 bg-white shadow-xl rounded-xl text-center md:mt-12 mt-4">
             <Toaster />
             <h2 className="text-2xl font-bold text-black">Scan or Upload Barcode</h2>
             <p className="text-md text-gray-500 mb-6">Scan the barcode of the product you want to check or upload an image of the barcode.</p>

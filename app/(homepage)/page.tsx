@@ -9,7 +9,7 @@ export default async function Home() {
   
   return (
     <div className="container">
-      <section className="-mt-20 md:mt-0">
+      <section className="-mt-20 md:mt-20">
         <Hero />
       </section>
 
@@ -17,15 +17,15 @@ export default async function Home() {
         <About />
       </section>
 
-      <section className="mt-12 md:mt-0">
+      <section className="mt-12 md:mt-24">
         <Goals />
       </section>
 
-      <section className="mt-16 md:mt-0">
+      <section className="mt-16 md:mt-24">
         <Discover />
       </section>
 
-      <section className="mt-20 md:mt-0">
+      <section className="mt-20 md:mt-20">
         <Footer />
       </section>
     </div>

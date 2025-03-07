@@ -4,7 +4,7 @@ import ketogenicDiet from '@/public/ketogenic-diet.png';
 
 export default function DietPage() {
     return (
-        <main className='container mx-auto flex flex-col sm:flex-row px-6 sm:px-14 py-10 items-center justify-center gap-8'>
+        <main className='container mx-auto flex flex-col sm:flex-row px-6 sm:px-14 md:py-10 py-2 items-center justify-center gap-8'>
             {/* Card utama untuk Ketogenic Diet */}
             <div className='bg-white shadow-2xl rounded-3xl p-8 sm:p-12 w-full max-w-3xl'>
                 <div className='flex flex-col sm:flex-row items-center justify-between gap-x-10'>
@@ -17,7 +17,7 @@ export default function DietPage() {
                         <div className='grid grid-cols-2 gap-10'>
                             <div className='text-center'>
                                 <p className='text-xl'><span className='font-bold text-3xl'>900</span> kcal</p>
-                                <p className='text-lg text-gray-600'>Calories Intake</p>
+                                <p className='text-md md:text-lg text-gray-600'>Calories Intake</p>
                                 <div className='h-2 md:h-4 w-full bg-gray-300 rounded-full mt-2'>
                                     <div className='h-full bg-emerald-500 rounded-full w-4/5'></div>
                                 </div>
@@ -25,7 +25,7 @@ export default function DietPage() {
 
                             <div className='text-center'>
                                 <p className='text-xl'><span className='font-bold text-3xl'>1.5</span> L</p>
-                                <p className='text-lg text-gray-600'>Water Intake</p>
+                                <p className='text-md md:text-lg text-gray-600'>Water Intake</p>
                                 <div className='h-2 md:h-4 w-full bg-gray-300 rounded-full mt-2'>
                                     <div className='h-full bg-blue-500 rounded-full w-2/5'></div>
                                 </div>

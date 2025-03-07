@@ -25,7 +25,7 @@ export default function Header() {
         <div className="hidden md:flex items-center space-x-6 text-lg">
           <Link href="/scan" className="font-semibold text-black hover:text-emerald-600 transition">Scan Barcode</Link>
           <Link href="/analytics" className="font-semibold text-black hover:text-emerald-600 transition">Analytics</Link>
-          <Link href="/personalizat" className="font-semibold text-black hover:text-emerald-600 transition">Personalization</Link>
+          <Link href="/personalization" className="font-semibold text-black hover:text-emerald-600 transition">Personalization</Link>
           <Link href="/about" className="font-semibold text-black hover:text-emerald-600 transition">About</Link>
           <form action={async () => {
             "use server";

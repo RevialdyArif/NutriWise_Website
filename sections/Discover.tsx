@@ -25,7 +25,7 @@ export default function Discover() {
                             <Image src={check} alt="check" width={40} height={40} className="w-10 md:w-12" />
                             <div>
                                 <h3 className="text-xl md:text-2xl font-bold">Empower Your Health Journey</h3>
-                                <p className="text-base md:text-lg">
+                                <p className="text-sm text-justify md:text-lg">
                                     Unlock the power of NutriWise to easily understand your foods nutritional value and make healthier choices every day.
                                 </p>
                             </div>

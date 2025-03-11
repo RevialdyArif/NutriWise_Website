@@ -8,7 +8,6 @@ import { eq } from "drizzle-orm";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
   },
   providers: [
     CredentialsProvider({
@@ -53,16 +52,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log("SESSION BEFORE:", session);
-      console.log("TOKEN:", token);
-
       if (session.user) {
-        session.user.id = token.id as string ?? "";
-        session.user.name = token.name as string ?? "";
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
       }
 
-      console.log("SESSION AFTER:", session);
       return session;
-    }
+    },
   },
 });

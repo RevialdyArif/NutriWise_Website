@@ -31,7 +31,6 @@ const RootLayout = async ({ children }: { children: ReactNode }) =>  {
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           {children}
-
           <Toaster />
         </body>
       </SessionProvider>

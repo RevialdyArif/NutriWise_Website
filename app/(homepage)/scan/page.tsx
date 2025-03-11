@@ -12,6 +12,8 @@ import Image from "next/image";
 interface Product {
     product_name?: string;
     brands?: string;
+    categories?: string;
+    quantity?: number;
     image_url?: string;
     nutriscore_grade?: string;
     nova_group?: number;
@@ -115,11 +117,11 @@ export default function BarcodeScanner() {
             const data = await response.json();
             if (data.status === 1) {
                 setProduct(data.product);
-                toast.success("Produk ditemukan!");
+                toast.success("Found product!");
             } else {
                 setProduct(null);
-                setError("Produk tidak ditemukan. Coba barcode lain.");
-                toast.error("Produk tidak ditemukan.");
+                setError("Product not found. Please check the barcode or try again.");
+                toast.error("Product not found. Please check the barcode or try again.");
             }
         } catch (error) {
             console.log(error, "Error fetching product data.");
@@ -164,8 +166,10 @@ export default function BarcodeScanner() {
 
             {product && (
                 <div className="mt-8 p-6 border rounded-xl bg-gray-50 shadow-lg">
-                    <h3 className="text-2xl font-bold text-gray-800 mt-6">{product.product_name || "Nama Produk Tidak Diketahui"}</h3>
-                    <p className="text-lg text-gray-600">Merek: {product.brands || "Tidak diketahui"}</p>
+                    <h3 className="text-2xl font-bold text-gray-800 mt-6">{product.product_name || "Unknown"}</h3>
+                    <p className="text-lg text-gray-600"><span className="font-semibold text-black">Brand: </span>{product.brands || "Unknown"}</p>
+                    <p className="text-lg text-gray-600"><span className="font-semibold text-black">Quantity: </span>{product.quantity || "Unknown"}</p>
+                    <p className="text-lg text-gray-600"><span className="font-semibold text-black">Categories: </span>{product.categories || "Unknown"}</p>
                     {product.image_url && <Image src={product.image_url} alt="Product" width={800} height={500} className="mt-4 mb-12 w-full rounded-lg" />}
                     <div className={`p-4 rounded-lg text-white text-xl font-bold text-center ${nutriScoreColors[product.nutriscore_grade as keyof typeof nutriScoreColors] ?? "bg-gray-400"}`}>
                         Nutri-Score: {product.nutriscore_grade?.toUpperCase() || "N/A"}

@@ -10,11 +10,12 @@ import { useSession } from 'next-auth/react'
 
 export default function PersonalizationPage() {
   const { data: session } = useSession();
+  
   return (
     <div className='container mx-auto flex flex-col px-6 sm:px-10 py-10 items-center justify-center gap-8'>
       <div className='flex flex-col gap-3 items-center justify-center text-center'>
         {session ? (
-          <h1 className='text-3xl sm:text-4xl font-bold text-emerald-600'>{session.user?.name}</h1>
+          <h1 className='text-3xl sm:text-4xl font-bold text-emerald-600'>{session?.user?.name}</h1>
         ) : (
           <h1 className='text-3xl sm:text-4xl font-bold text-emerald-600'>Welcome, Guest!</h1>
         )}

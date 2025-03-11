@@ -36,7 +36,7 @@ export default function Discover() {
                             <Image src={check} alt="check" width={40} height={40} className="w-10 md:w-12" />
                             <div>
                                 <h3 className="text-xl md:text-2xl font-bold">Trusted Nutrition Data</h3>
-                                <p className="text-base md:text-lg">
+                                <p className="text-sm text-justify md:text-lg">
                                     Count on accurate nutrition insights. NutriWise verifies each food entry, so you know youre tracking precise information.
                                 </p>
                             </div>
@@ -47,7 +47,7 @@ export default function Discover() {
                             <Image src={check} alt="check" width={40} height={40} className="w-10 md:w-12" />
                             <div>
                                 <h3 className="text-xl md:text-2xl font-bold">Your Nutrition, Your Privacy</h3>
-                                <p className="text-base md:text-lg">
+                                <p className="text-sm text-justify md:text-lg">
                                     With NutriWise, your health data is safe, private, and never shared, giving you peace of mind as you work towards your wellness goals.
                                 </p>
                             </div>

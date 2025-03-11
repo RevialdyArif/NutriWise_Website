@@ -1,9 +1,9 @@
 
-import About from "@/sections/About";
-import Discover from "@/sections/Discover";
-import Footer from "@/sections/Footer";
-import Goals from "@/sections/Goals";
-import Hero from "@/sections/Hero";
+import About from "@/components/About";
+import Discover from "@/components/Discover";
+import Footer from "@/components/Footer";
+import Goals from "@/components/Goals";
+import Hero from "@/components/Hero";
 
 export default async function Home() {
   

@@ -29,6 +29,7 @@ const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit
 
     const handleSubmit: SubmitHandler<T> = async (data) => {
         const result = await onSubmit(data);
+
         if (result.success) {
             toast.success(isSignIn ? "Logged in successfully" : "Account created successfully");
             router.push("/");
@@ -82,7 +83,7 @@ const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit
                 </Form>
                 <p className="text-gray-500 text-center mt-4">
                     {isSignIn ? "Don't have an account? " : "Already have an account? "}
-                    <Link href={isSignIn ? "/sign-out" : "/sign-in"} className="text-emerald-600 hover:text-emerald-700">
+                    <Link href={isSignIn ? "/sign-up" : "/sign-in"} className="text-emerald-600 hover:text-emerald-700">
                         {isSignIn ? "Sign up here" : "Sign in here"}
                     </Link>
                 </p>

@@ -1,11 +1,9 @@
-"use client";
-
 import { ReactNode } from 'react'
 import { redirect } from 'next/navigation'
-import { useSession } from 'next-auth/react';
+import { auth } from '@/auth'
 
-const Layout = ({ children }: { children: ReactNode}) => {
-  const { data: session } = useSession();
+const Layout = async ({ children }: { children: ReactNode}) => {
+  const session = await auth()
   
   if (session) {
     redirect("/");

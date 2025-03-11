@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Button } from "@/components/ui/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from 'next/image'
 import woman from '@/public/woman.png'
 

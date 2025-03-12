@@ -53,7 +53,7 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
                     calories: Number(calories),
                     protein: Number(protein),
                     carbs: Number(carbs),
-                       fat: Number(fat),
+                    fat: Number(fat),
                 }),
             })
 
@@ -65,7 +65,7 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
 
             onFoodAdded()
             resetForm()
-            
+
             setTimeout(() => {
                 setOpen(false)
             }, 500)

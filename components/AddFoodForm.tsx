@@ -18,14 +18,52 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }) {
+type FoodItem = {
+    id: string
+    name: string
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+    timestamp: Date
+}
+
+type AddFoodFormProps = {
+    onFoodAdded: (food: FoodItem) => void
+    onFoodUpdated: (food: FoodItem) => void
+    editingFood: FoodItem | null
+    isOpen: boolean
+    setOpen: (open: boolean) => void
+}
+
+export default function AddFoodForm({ onFoodAdded, onFoodUpdated, editingFood, isOpen, setOpen }: AddFoodFormProps) {
     const [foodName, setFoodName] = React.useState("")
     const [calories, setCalories] = React.useState("")
     const [protein, setProtein] = React.useState("")
     const [carbs, setCarbs] = React.useState("")
     const [fat, setFat] = React.useState("")
     const [loading, setLoading] = React.useState(false)
-    const [open, setOpen] = React.useState(false)
+    const isEditing = !!editingFood
+
+    React.useEffect(() => {
+        if (editingFood) {
+            setFoodName(editingFood.name)
+            setCalories(editingFood.calories.toString())
+            setProtein(editingFood.protein.toString())
+            setCarbs(editingFood.carbs.toString())
+            setFat(editingFood.fat.toString())
+        }
+    }, [editingFood])
+
+    React.useEffect(() => {
+        if (!isOpen) {
+            setTimeout(() => {
+                if (!isOpen && !isEditing) {
+                    resetForm()
+                }
+            }, 300)
+        }
+    }, [isOpen, isEditing])
 
     const resetForm = () => {
         setFoodName("")
@@ -45,27 +83,46 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
 
         setLoading(true)
         try {
-            const res = await fetch("/api/meals", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: foodName,
-                    calories: Number(calories),
-                    protein: Number(protein),
-                    carbs: Number(carbs),
-                    fat: Number(fat),
-                }),
-            })
+            const foodItem: FoodItem = {
+                id: editingFood ? editingFood.id : Math.random().toString(36),
+                name: foodName,
+                calories: Number(calories),
+                protein: Number(protein),
+                carbs: Number(carbs),
+                fat: Number(fat),
+                timestamp: editingFood ? editingFood.timestamp : new Date(),
+            }
 
-            if (!res.ok) throw new Error("Failed to add food")
+            try {
+                const method = editingFood ? "PUT" : "POST"
 
-            toast.success("Successfully added food", {
-                description: `${foodName} has been added to your list.`,
-            })
+                const res = await fetch("/api/meals", {
+                    method: method,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(foodItem),
+                })
 
-            onFoodAdded()
+                if (!res.ok) {
+                    const errorData = await res.json().catch(() => ({}))
+                    console.error("API Error:", errorData.message || "Failed to process food item")
+                }
+            } catch (error) {
+                console.error("API Error:", error)
+                toast.warning("Failed to add food", {
+                    description: "An error occurred while adding food.",
+                })
+            }
+
+            if (editingFood) {
+                onFoodUpdated(foodItem)
+            } else {
+                onFoodAdded(foodItem)
+                toast.success("Successfully editing food", {
+                    description: `${foodName} has successfully been edited.`,
+                })
+            }
+
             resetForm()
-
             setTimeout(() => {
                 setOpen(false)
             }, 500)
@@ -80,7 +137,7 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
     }
 
     return (
-        <Drawer open={open} onOpenChange={setOpen}>
+        <Drawer open={isOpen} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
                 <Button
                     size="icon"
@@ -91,9 +148,9 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
             </DrawerTrigger>
             <DrawerContent className="h-full max-w-lg mx-auto bg-white rounded-t-xl shadow-xl">
                 <DrawerHeader className="px-6 pt-6 pb-4">
-                    <DrawerTitle className="text-3xl font-bold text-primary">Add Food</DrawerTitle>
+                    <DrawerTitle className="text-3xl font-bold text-primary">{isEditing ? "Edit Food" : "Add Food"}</DrawerTitle>
                     <DrawerDescription className="text-md text-muted-foreground">
-                        Enter your food details below
+                        {isEditing ? "Update the food information" : "Enter your food details below"}
                     </DrawerDescription>
                 </DrawerHeader>
 
@@ -196,7 +253,7 @@ export default function AddFoodForm({ onFoodAdded }: { onFoodAdded: () => void }
                             disabled={loading}
                             className="bg-emerald-600 text-white hover:bg-emerald-700 transition-colors"
                         >
-                            {loading ? "Adding..." : "Add Food"}
+                            {loading ? "Adding..." : isEditing ? "Update Food" : "Add Food"}
                         </Button>
                     </div>
                 </DrawerFooter>

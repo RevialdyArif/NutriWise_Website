@@ -78,9 +78,13 @@ export async function DELETE(req: Request) {
         return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
 
-    await db
-      .delete(meals)
-      .where(eq(meals.id, id));
-
-    return NextResponse.json({ message: "Food Deleted" }, { status: 200 });
+    try {
+        await db
+          .delete(meals)
+          .where(eq(meals.id, id));
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting meal:", error);
+        return NextResponse.json({ error: "Failed to delete meal" }, { status: 500 });
+    }
 }
